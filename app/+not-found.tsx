@@ -1,30 +1,16 @@
-import { Link, Stack } from 'expo-router';
-import { StyleSheet } from 'react-native';
+import { View, Text, Image, StyleSheet } from 'react-native';
 
-
-export default function NotFoundScreen() {
+export default function NotFound() {
   return (
-    <>
-         <Stack.Screen options={{ title: 'Oops!' }} />
-      <View style={styles.container}>
-        <Text type="title">This screen does not exist.</Text>
-        <Link href="/" style={styles.link}>
-          <Text type="link">Go to home screen!</Text>
-        </Link>
-      </View>
-    </>
+    <View style={styles.container}>
+      <Image source={require('../assets/images/iconMorty.png')} style={styles.image} />
+      <Text style={styles.text}>Page not found, sorry</Text>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: 20,
-  },
-  link: {
-    marginTop: 15,
-    paddingVertical: 15,
-  },
+  container: { flex: 1, backgroundColor: '#141438', alignItems: 'center', justifyContent: 'center' },
+  image: { width: 100, height: 100, marginBottom: 20 },
+  text: { color: '#fff', fontSize: 18 },
 });

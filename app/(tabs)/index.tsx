@@ -1,91 +1,41 @@
-import { useEffect, useState } from 'react';
-import { ActivityIndicator, FlatList, Image, StyleSheet, Text, View } from 'react-native';
+import { View, Text, Image, StyleSheet } from 'react-native';
 
-export default function HomeScreen() {
-  const [characters, setCharacters] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    const fetchCharacters = async () => {
-      try {
-        const response = await fetch('https://rickandmortyapi.com/api/character');
-        const json = await response.json();
-        setCharacters(json.results); // `results` é o array de personagens
-      } catch (err) {
-        setError('Erro ao carregar personagens.');
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchCharacters();
-  }, []);
-
-  if (loading) {
-    return (
-      <View style={styles.container}>
-        <ActivityIndicator size="large" color="#00bfff" />
-      </View>
-    );
-  }
-
-  if (error) {
-    return (
-      <View style={styles.container}>
-        <Text>{error}</Text>
-      </View>
-    );
-  }
-
+export default function Home() {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Personagens de Rick and Morty</Text>
-      <FlatList
-        data={characters}
-        keyExtractor={(item) => item.id.toString()}
-        renderItem={({ item }) => (
-          <View style={styles.card}>
-            <Image source={{ uri: item.image }} style={styles.image} />
-            <Text style={styles.name}>{item.name}</Text>
-            <Text>Status: {item.status}</Text>
-            <Text>Espécie: {item.species}</Text>
-          </View>
-        )}
-      />
+   <Image
+  source={require('@/assets/images/rick_and_morty_wallpaper_photo.jpg')}
+  style={styles.image}
+  resizeMode="contain"
+/>
+
+      <Text style={styles.title}>Welcome to the Rick and Morty API</Text>
+      <Text style={styles.subtitle}>Work done by ArtByteCoder00</Text>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: '#141438',
     flex: 1,
-    paddingTop: 40,
-    paddingHorizontal: 10,
-    backgroundColor: '#f5f5f5',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 20,
+  },
+  image: {
+    width: 300,
+    height: 200,
+    marginBottom: 20,
   },
   title: {
     fontSize: 22,
+    color: '#fff',
     fontWeight: 'bold',
-    textAlign: 'center',
     marginBottom: 10,
   },
-  card: {
-    backgroundColor: '#fff',
-    padding: 10,
-    marginVertical: 6,
-    borderRadius: 8,
-    alignItems: 'center',
-    elevation: 2,
-  },
-  image: {
-    width: 100,
-    height: 100,
-    borderRadius: 50,
-  },
-  name: {
-    fontWeight: 'bold',
+  subtitle: {
     fontSize: 16,
-    marginVertical: 5,
+    color: '#aaa',
   },
 });
